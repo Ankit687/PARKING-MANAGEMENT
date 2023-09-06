@@ -2,6 +2,7 @@ package com.watcix.parkingmanagement.service;
 
 import com.watcix.parkingmanagement.dto.BlockResponse;
 import com.watcix.parkingmanagement.dto.SlotAndBlockResponse;
+import com.watcix.parkingmanagement.dto.VehicleCountResponse;
 import com.watcix.parkingmanagement.entity.SlotBlockAvailabilityDetail;
 import com.watcix.parkingmanagement.entity.SlotDetail;
 import com.watcix.parkingmanagement.entity.UserParkingDetail;
@@ -39,5 +40,10 @@ public class AdminService {
 
     public ResponseEntity<List<UserParkingDetail>> getUserParkingDetails() {
         return new ResponseEntity<>(userParkingService.getUserParkingDetailList(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<VehicleCountResponse> getVehiclesCount(String vehicleCategory) {
+        List<UserParkingDetail> userParkingDetailList = userParkingService.getUserParkingDetailListByVehicleCategory(vehicleCategory);
+        return new ResponseEntity<>(new VehicleCountResponse(userParkingDetailList.size(), userParkingDetailList), HttpStatus.OK);
     }
 }

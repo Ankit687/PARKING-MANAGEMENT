@@ -39,4 +39,9 @@ public class UserParkingRepository {
     public void saveUserParkingDetail(UserParkingDetail userParkingDetail) {
         userParkingDetailList.add(userParkingDetail);
     }
+
+    public List<UserParkingDetail> getUserParkingDetailListByVehicleCategory(String vehicleCategory) {
+        return userParkingDetailList.stream().filter(userParkingDetail -> userParkingDetail.getUserDetails().getVehicleCategory().equalsIgnoreCase(vehicleCategory))
+                .collect(Collectors.toList());
+    }
 }

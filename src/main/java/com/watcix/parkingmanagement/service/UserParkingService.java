@@ -22,6 +22,10 @@ public class UserParkingService {
         return userParkingRepository.getUserParkingDetailListByVehicleId(vehicleId);
     }
 
+    public List<UserParkingDetail> getUserParkingDetailListByVehicleCategory(String vehicleCategory) {
+        return userParkingRepository.getUserParkingDetailListByVehicleCategory(vehicleCategory);
+    }
+
     public List<UserParkingDetail> getUserParkingDetailList() {
         return userParkingRepository.getUserParkingDetailList();
     }
