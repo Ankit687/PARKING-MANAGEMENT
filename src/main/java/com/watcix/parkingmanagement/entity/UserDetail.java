@@ -1,15 +1,15 @@
 package com.watcix.parkingmanagement.entity;
 
-public class UserDetails {
+public class UserDetail {
     private String name;
     private Long mobile;
     private String vehicleId;
     private String vehicleCategory;
 
-    public UserDetails() {
+    public UserDetail() {
     }
 
-    public UserDetails(String name, Long mobile, String vehicleId, String vehicleCategory) {
+    public UserDetail(String name, Long mobile, String vehicleId, String vehicleCategory) {
         this.name = name;
         this.mobile = mobile;
         this.vehicleId = vehicleId;

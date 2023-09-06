@@ -1,12 +1,12 @@
 package com.watcix.parkingmanagement.entity;
 
-public class BlockDetails {
+public class BlockDetail {
     private String block;
 
-    public BlockDetails() {
+    public BlockDetail() {
     }
 
-    public BlockDetails(String block) {
+    public BlockDetail(String block) {
         this.block = block;
     }
 

@@ -1,12 +1,12 @@
 package com.watcix.parkingmanagement.entity;
 
-public class SlotDetails {
+public class SlotDetail {
     private Integer slot;
 
-    public SlotDetails() {
+    public SlotDetail() {
     }
 
-    public SlotDetails(Integer slot) {
+    public SlotDetail(Integer slot) {
         this.slot = slot;
     }
 

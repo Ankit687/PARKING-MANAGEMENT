@@ -2,23 +2,30 @@ package com.watcix.parkingmanagement.entity;
 
 import java.time.LocalDateTime;
 
-public class UserParkingDetails {
+public class UserParkingDetail {
     private String vehicleId;
-    private UserDetails userDetails;
+    private UserDetail userDetail;
     private LocalDateTime entryTime;
-    private LocalDateTime existTime;
-    private SlotBlockAvailabilityDetails slotBlockAvailabilityDetails;
+    private LocalDateTime exitTime;
+    private SlotBlockAvailabilityDetail slotBlockAvailabilityDetail;
     private Double parkingAmount;
 
-    public UserParkingDetails() {
+    public UserParkingDetail() {
     }
 
-    public UserParkingDetails(String vehicleId, UserDetails userDetails, LocalDateTime entryTime, LocalDateTime existTime, SlotBlockAvailabilityDetails slotBlockAvailabilityDetails, Double parkingAmount) {
+    public UserParkingDetail(String vehicleId, UserDetail userDetail, LocalDateTime entryTime, SlotBlockAvailabilityDetail slotBlockAvailabilityDetail) {
         this.vehicleId = vehicleId;
-        this.userDetails = userDetails;
+        this.userDetail = userDetail;
         this.entryTime = entryTime;
-        this.existTime = existTime;
-        this.slotBlockAvailabilityDetails = slotBlockAvailabilityDetails;
+        this.slotBlockAvailabilityDetail = slotBlockAvailabilityDetail;
+    }
+
+    public UserParkingDetail(String vehicleId, UserDetail userDetail, LocalDateTime entryTime, LocalDateTime exitTime, SlotBlockAvailabilityDetail slotBlockAvailabilityDetail, Double parkingAmount) {
+        this.vehicleId = vehicleId;
+        this.userDetail = userDetail;
+        this.entryTime = entryTime;
+        this.exitTime = exitTime;
+        this.slotBlockAvailabilityDetail = slotBlockAvailabilityDetail;
         this.parkingAmount = parkingAmount;
     }
 
@@ -30,12 +37,12 @@ public class UserParkingDetails {
         this.vehicleId = vehicleId;
     }
 
-    public UserDetails getUserDetails() {
-        return userDetails;
+    public UserDetail getUserDetails() {
+        return userDetail;
     }
 
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setUserDetails(UserDetail userDetail) {
+        this.userDetail = userDetail;
     }
 
     public LocalDateTime getEntryTime() {
@@ -46,20 +53,20 @@ public class UserParkingDetails {
         this.entryTime = entryTime;
     }
 
-    public LocalDateTime getExistTime() {
-        return existTime;
+    public LocalDateTime getExitTime() {
+        return exitTime;
     }
 
-    public void setExistTime(LocalDateTime existTime) {
-        this.existTime = existTime;
+    public void setExitTime(LocalDateTime exitTime) {
+        this.exitTime = exitTime;
     }
 
-    public SlotBlockAvailabilityDetails getSlotBlockAvailabilityDetails() {
-        return slotBlockAvailabilityDetails;
+    public SlotBlockAvailabilityDetail getSlotBlockAvailabilityDetails() {
+        return slotBlockAvailabilityDetail;
     }
 
-    public void setSlotBlockAvailabilityDetails(SlotBlockAvailabilityDetails slotBlockAvailabilityDetails) {
-        this.slotBlockAvailabilityDetails = slotBlockAvailabilityDetails;
+    public void setSlotBlockAvailabilityDetails(SlotBlockAvailabilityDetail slotBlockAvailabilityDetail) {
+        this.slotBlockAvailabilityDetail = slotBlockAvailabilityDetail;
     }
 
     public Double getParkingAmount() {
@@ -74,10 +81,10 @@ public class UserParkingDetails {
     public String toString() {
         return "UserParkingDetails{" +
                 "vehicleId='" + vehicleId + '\'' +
-                ", userDetails=" + userDetails +
+                ", userDetails=" + userDetail +
                 ", entryTime=" + entryTime +
-                ", existTime=" + existTime +
-                ", slotBlockAvailabilityDetails=" + slotBlockAvailabilityDetails +
+                ", existTime=" + exitTime +
+                ", slotBlockAvailabilityDetails=" + slotBlockAvailabilityDetail +
                 ", parkingAmount=" + parkingAmount +
                 '}';
     }

@@ -1,32 +1,32 @@
 package com.watcix.parkingmanagement.entity;
 
-public class SlotBlockAvailabilityDetails {
-    private SlotDetails slot;
-    private BlockDetails block;
+public class SlotBlockAvailabilityDetail {
+    private SlotDetail slot;
+    private BlockDetail block;
     private Boolean availability;
 
-    public SlotBlockAvailabilityDetails() {
+    public SlotBlockAvailabilityDetail() {
     }
 
-    public SlotBlockAvailabilityDetails(SlotDetails slot, BlockDetails block, Boolean availability) {
+    public SlotBlockAvailabilityDetail(SlotDetail slot, BlockDetail block, Boolean availability) {
         this.slot = slot;
         this.block = block;
         this.availability = availability;
     }
 
-    public SlotDetails getSlot() {
+    public SlotDetail getSlot() {
         return slot;
     }
 
-    public void setSlot(SlotDetails slot) {
+    public void setSlot(SlotDetail slot) {
         this.slot = slot;
     }
 
-    public BlockDetails getBlock() {
+    public BlockDetail getBlock() {
         return block;
     }
 
-    public void setBlock(BlockDetails block) {
+    public void setBlock(BlockDetail block) {
         this.block = block;
     }
 
