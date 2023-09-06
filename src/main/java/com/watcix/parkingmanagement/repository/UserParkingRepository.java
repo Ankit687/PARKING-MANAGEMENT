@@ -22,6 +22,11 @@ public class UserParkingRepository {
                 .collect(Collectors.toList());
     }
 
+    public List<UserParkingDetail> getUserParkingDetailList() {
+        return userParkingDetailList.stream().filter(userParkingDetail -> userParkingDetail.getParkingAmount() == null)
+                .collect(Collectors.toList());
+    }
+
     public List<UserParkingDetail> getUserParkingDetailListBetweenEntryTimeAndExistTime(LocalDateTime entryTime, LocalDateTime existTime) {
         return userParkingDetailList.stream().filter(userParkingDetail -> !userParkingDetail.getEntryTime().isBefore(entryTime)
                         && !userParkingDetail.getExitTime().isAfter(existTime))

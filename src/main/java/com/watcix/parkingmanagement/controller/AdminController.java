@@ -2,6 +2,7 @@ package com.watcix.parkingmanagement.controller;
 
 import com.watcix.parkingmanagement.dto.ResponseDto;
 import com.watcix.parkingmanagement.dto.SlotAndBlockResponse;
+import com.watcix.parkingmanagement.entity.UserParkingDetail;
 import com.watcix.parkingmanagement.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,12 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("getAllSlotAndBlock")
-    public ResponseEntity<List<SlotAndBlockResponse>> getAllSlotAndBlock () {
+    public ResponseEntity<List<SlotAndBlockResponse>> getAllSlotAndBlock() {
         return adminService.getAllSlotAndBlock();
+    }
+
+    @GetMapping("/getUserParkingDetails")
+    public ResponseEntity<List<UserParkingDetail>> getUserParkingDetails() {
+        return adminService.getUserParkingDetails();
     }
 }

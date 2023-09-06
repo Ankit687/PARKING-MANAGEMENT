@@ -54,6 +54,19 @@ public class UserService {
     }
 
     public ResponseEntity<ResponseDto> saveUserExitDetail(String vehicleId) {
-        return null;
+        UserParkingDetail userParkingDetail = userParkingService.getUserParkingDetailByVehicleId(vehicleId);
+        userParkingDetail.setExitTime(LocalDateTime.now());
+        double rateAmount;
+        if (userParkingDetail.getUserDetails().getVehicleCategory().equalsIgnoreCase("SUPERBIKE"))
+            rateAmount = 60.0;
+        else if (userParkingDetail.getUserDetails().getVehicleCategory().equalsIgnoreCase("SCOOTER"))
+            rateAmount = 50.0;
+        else
+            rateAmount = 40.0;
+        Double parkingAmount = userParkingService.calculateParkingAmount(userParkingDetail.getEntryTime(), userParkingDetail.getExitTime(), rateAmount);
+        userParkingDetail.setParkingAmount(parkingAmount);
+        userParkingService.saveUserParkingDetail(userParkingDetail);
+        ResponseDto responseDto = new ResponseDto("Your Parking Details", userParkingDetail.getVehicleId(), userParkingDetail.getSlotBlockAvailabilityDetails().getSlot().getSlot(), userParkingDetail.getSlotBlockAvailabilityDetails().getBlock().getBlock(), userParkingDetail.getEntryTime(), userParkingDetail.getExitTime(), userParkingDetail.getParkingAmount());
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
