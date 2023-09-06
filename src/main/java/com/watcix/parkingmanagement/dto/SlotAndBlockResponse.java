@@ -7,13 +7,15 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SlotAndBlockResponse {
     private Integer slot;
+    private String slotCategory;
     List<BlockResponse> blockResponseList;
 
     public SlotAndBlockResponse() {
     }
 
-    public SlotAndBlockResponse(Integer slot, List<BlockResponse> blockResponseList) {
+    public SlotAndBlockResponse(Integer slot, String slotCategory, List<BlockResponse> blockResponseList) {
         this.slot = slot;
+        this.slotCategory = slotCategory;
         this.blockResponseList = blockResponseList;
     }
 
@@ -23,6 +25,14 @@ public class SlotAndBlockResponse {
 
     public void setSlot(Integer slot) {
         this.slot = slot;
+    }
+
+    public String getSlotCategory() {
+        return slotCategory;
+    }
+
+    public void setSlotCategory(String slotCategory) {
+        this.slotCategory = slotCategory;
     }
 
     public List<BlockResponse> getBlockResponseList() {
@@ -37,6 +47,7 @@ public class SlotAndBlockResponse {
     public String toString() {
         return "SlotAndBlockResponse{" +
                 "slot=" + slot +
+                "slotCategory=" + slotCategory +
                 ", blockResponseList=" + blockResponseList +
                 '}';
     }

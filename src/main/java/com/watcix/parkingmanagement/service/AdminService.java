@@ -3,6 +3,7 @@ package com.watcix.parkingmanagement.service;
 import com.watcix.parkingmanagement.dto.BlockResponse;
 import com.watcix.parkingmanagement.dto.SlotAndBlockResponse;
 import com.watcix.parkingmanagement.entity.SlotBlockAvailabilityDetail;
+import com.watcix.parkingmanagement.entity.SlotDetail;
 import com.watcix.parkingmanagement.entity.UserParkingDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,26 +25,15 @@ public class AdminService {
     public ResponseEntity<List<SlotAndBlockResponse>> getAllSlotAndBlock() {
         List<SlotAndBlockResponse> slotAndBlockResponseList = new ArrayList<>();
         List<BlockResponse> blockResponseList = new ArrayList<>();
-        List<SlotBlockAvailabilityDetail> availabilityDetailList = slotBlockAvailabilityService.getSlotBlockAvailabilityListBySlot(1);
-        for (SlotBlockAvailabilityDetail slotBlockAvailabilityDetail : availabilityDetailList) {
-            blockResponseList.add(new BlockResponse(slotBlockAvailabilityDetail.getBlock().getBlock(), slotBlockAvailabilityDetail.getAvailability()));
+        List<SlotDetail> slotDetailList = slotBlockAvailabilityService.getSlotList();
+        for (SlotDetail slotDetail : slotDetailList) {
+            List<SlotBlockAvailabilityDetail> availabilityDetailList = slotBlockAvailabilityService.getSlotBlockAvailabilityListBySlot(slotDetail.getSlot());
+            for (SlotBlockAvailabilityDetail slotBlockAvailabilityDetail : availabilityDetailList) {
+                blockResponseList.add(new BlockResponse(slotBlockAvailabilityDetail.getBlock().getBlock(), slotBlockAvailabilityDetail.getAvailability()));
+            }
+            slotAndBlockResponseList.add(new SlotAndBlockResponse(slotDetail.getSlot(), slotDetail.getSlotCategory(), blockResponseList));
+            blockResponseList = new ArrayList<>();
         }
-        slotAndBlockResponseList.add(new SlotAndBlockResponse(1, blockResponseList));
-        blockResponseList = new ArrayList<>();
-
-        availabilityDetailList = slotBlockAvailabilityService.getSlotBlockAvailabilityListBySlot(2);
-        for (SlotBlockAvailabilityDetail slotBlockAvailabilityDetail : availabilityDetailList) {
-            blockResponseList.add(new BlockResponse(slotBlockAvailabilityDetail.getBlock().getBlock(), slotBlockAvailabilityDetail.getAvailability()));
-        }
-        slotAndBlockResponseList.add(new SlotAndBlockResponse(2, blockResponseList));
-        blockResponseList = new ArrayList<>();
-
-        availabilityDetailList = slotBlockAvailabilityService.getSlotBlockAvailabilityListBySlot(3);
-        for (SlotBlockAvailabilityDetail slotBlockAvailabilityDetail : availabilityDetailList) {
-            blockResponseList.add(new BlockResponse(slotBlockAvailabilityDetail.getBlock().getBlock(), slotBlockAvailabilityDetail.getAvailability()));
-        }
-        slotAndBlockResponseList.add(new SlotAndBlockResponse(3, blockResponseList));
-
         return new ResponseEntity<>(slotAndBlockResponseList, HttpStatus.OK);
     }
 

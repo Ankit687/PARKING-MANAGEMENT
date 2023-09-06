@@ -24,6 +24,11 @@ public class SlotBlockAvailabilityService {
                 .findFirst().orElse(null);
     }
 
+    public SlotBlockAvailabilityDetail getSlotBlockAvailabilityDetailListBySlotCategory(String slotCategory) {
+        return slotBlockAvailabilityRepository.getSlotBlockAvailabilityDetailListBySlotCategory(slotCategory).stream().filter(SlotBlockAvailabilityDetail::getAvailability)
+                .findFirst().orElse(null);
+    }
+
     public SlotBlockAvailabilityDetail getSlotBlockAvailabilityByBlock(String block) {
         return slotBlockAvailabilityRepository.getSlotBlockAvailabilityDetailListByBlock(block).stream().filter(SlotBlockAvailabilityDetail::getAvailability)
                 .findFirst().orElse(null);
@@ -36,6 +41,10 @@ public class SlotBlockAvailabilityService {
 
     public List<SlotBlockAvailabilityDetail> getSlotBlockAvailabilityListBySlot(int slot) {
         return slotBlockAvailabilityRepository.getSlotBlockAvailabilityDetailListBySlot(slot);
+    }
+
+    public List<SlotBlockAvailabilityDetail> getSlotBlockAvailabilityDetailListBySlotWithSlotCategory(int slot, String slotCategory) {
+        return slotBlockAvailabilityRepository.getSlotBlockAvailabilityDetailListBySlotWithSlotCategory(slot, slotCategory);
     }
 
     public List<SlotBlockAvailabilityDetail> getSlotBlockAvailabilityListByBlock(String block) {

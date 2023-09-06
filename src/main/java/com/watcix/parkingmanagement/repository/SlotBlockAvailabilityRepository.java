@@ -20,9 +20,9 @@ public class SlotBlockAvailabilityRepository {
     private final List<SlotBlockAvailabilityDetail> slotBlockAvailabilityDetailList = new ArrayList<>();
 
     public void loadDefaultAvailability() {
-        slotDetailList.add(new SlotDetail(1));
-        slotDetailList.add(new SlotDetail(2));
-        slotDetailList.add(new SlotDetail(3));
+        slotDetailList.add(new SlotDetail(1, "GENERAL"));
+        slotDetailList.add(new SlotDetail(2, "SUPERBIKE"));
+        slotDetailList.add(new SlotDetail(3, "SCOOTER"));
 
         blockDetailList.add(new BlockDetail("A"));
         blockDetailList.add(new BlockDetail("B"));
@@ -37,6 +37,16 @@ public class SlotBlockAvailabilityRepository {
 
     public List<SlotBlockAvailabilityDetail> getSlotBlockAvailabilityDetailListBySlot(int slot) {
         return slotBlockAvailabilityDetailList.stream().filter(slotBlockAvailabilityDetail -> slotBlockAvailabilityDetail.getSlot().getSlot() == slot)
+                .collect(Collectors.toList());
+    }
+
+    public List<SlotBlockAvailabilityDetail> getSlotBlockAvailabilityDetailListBySlotWithSlotCategory(int slot, String slotCategory) {
+        return slotBlockAvailabilityDetailList.stream().filter(slotBlockAvailabilityDetail -> slotBlockAvailabilityDetail.getSlot().getSlot() == slot && slotBlockAvailabilityDetail.getSlot().getSlotCategory().equalsIgnoreCase(slotCategory))
+                .collect(Collectors.toList());
+    }
+
+    public List<SlotBlockAvailabilityDetail> getSlotBlockAvailabilityDetailListBySlotCategory(String slotCategory) {
+        return slotBlockAvailabilityDetailList.stream().filter(slotBlockAvailabilityDetail -> slotBlockAvailabilityDetail.getSlot().getSlotCategory().equalsIgnoreCase(slotCategory))
                 .collect(Collectors.toList());
     }
 
@@ -73,7 +83,7 @@ public class SlotBlockAvailabilityRepository {
         for (SlotAndBlockResponse slotAndBlockResponse : slotAndBlockResponseList) {
             SlotDetail slotDetail = slotDetailList.stream().filter(slotDetail1 -> Objects.equals(slotDetail1.getSlot(), slotAndBlockResponse.getSlot())).findFirst().orElse(null);
             if (ObjectUtils.isEmpty(slotDetail)) {
-                slotDetail = new SlotDetail(slotAndBlockResponse.getSlot());
+                slotDetail = new SlotDetail(slotAndBlockResponse.getSlot(), slotAndBlockResponse.getSlotCategory());
                 slotDetailList.add(slotDetail);
             }
             for (BlockResponse blockResponse : slotAndBlockResponse.getBlockResponseList()) {
@@ -82,9 +92,7 @@ public class SlotBlockAvailabilityRepository {
                     blockDetail = new BlockDetail(blockResponse.getBlock());
                     blockDetailList.add(blockDetail);
                 }
-                else {
-                    slotBlockAvailabilityDetailList.add(new SlotBlockAvailabilityDetail(slotDetail, blockDetail, ObjectUtils.isEmpty(blockResponse.getAvailability()) || blockResponse.getAvailability()));
-                }
+                slotBlockAvailabilityDetailList.add(new SlotBlockAvailabilityDetail(slotDetail, blockDetail, ObjectUtils.isEmpty(blockResponse.getAvailability()) || blockResponse.getAvailability()));
             }
         }
         return slotAndBlockResponseList;

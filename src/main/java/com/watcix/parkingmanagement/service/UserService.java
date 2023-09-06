@@ -27,21 +27,10 @@ public class UserService {
 
     public ResponseEntity<ResponseDto> saveUserEntryDetail(UserDetail userDetail) {
         userRepository.saveUserDetails(userDetail);
-        SlotBlockAvailabilityDetail availabilityDetail = slotBlockAvailabilityService.getSlotBlockAvailabilityBySlot(1);
+        SlotBlockAvailabilityDetail availabilityDetail = slotBlockAvailabilityService.getSlotBlockAvailabilityDetailListBySlotCategory("GENERAL");
         if (ObjectUtils.isEmpty(availabilityDetail) || !availabilityDetail.getAvailability()) {
-            if (userDetail.getVehicleCategory().equalsIgnoreCase("SUPERBIKE")) {
-                availabilityDetail = slotBlockAvailabilityService.getSlotBlockAvailabilityBySlot(2);
-                if (ObjectUtils.isEmpty(availabilityDetail) || !availabilityDetail.getAvailability()) {
-                    ResponseDto responseDto = new ResponseDto("No Slots are available", userDetail.getVehicleId());
-                    return new ResponseEntity<>(responseDto, HttpStatus.OK);
-                }
-            } else if (userDetail.getVehicleCategory().equalsIgnoreCase("SCOOTER")) {
-                availabilityDetail = slotBlockAvailabilityService.getSlotBlockAvailabilityBySlot(3);
-                if (ObjectUtils.isEmpty(availabilityDetail) || !availabilityDetail.getAvailability()) {
-                    ResponseDto responseDto = new ResponseDto("No Slots are available", userDetail.getVehicleId());
-                    return new ResponseEntity<>(responseDto, HttpStatus.OK);
-                }
-            } else {
+            availabilityDetail = slotBlockAvailabilityService.getSlotBlockAvailabilityDetailListBySlotCategory(userDetail.getVehicleCategory());
+            if (ObjectUtils.isEmpty(availabilityDetail) || !availabilityDetail.getAvailability()) {
                 ResponseDto responseDto = new ResponseDto("No Slots are available", userDetail.getVehicleId());
                 return new ResponseEntity<>(responseDto, HttpStatus.OK);
             }
