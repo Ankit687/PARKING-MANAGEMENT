@@ -1,7 +1,10 @@
 package com.watcix.parkingmanagement.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SlotAndBlockResponse {
     private Integer slot;
     List<BlockResponse> blockResponseList;

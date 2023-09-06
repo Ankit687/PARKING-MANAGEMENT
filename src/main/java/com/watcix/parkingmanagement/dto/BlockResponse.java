@@ -1,5 +1,8 @@
 package com.watcix.parkingmanagement.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlockResponse {
     private String block;
     private boolean availability;
@@ -20,7 +23,7 @@ public class BlockResponse {
         this.block = block;
     }
 
-    public boolean isAvailability() {
+    public boolean getAvailability() {
         return availability;
     }
 

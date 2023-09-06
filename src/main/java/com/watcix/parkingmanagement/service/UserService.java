@@ -66,6 +66,9 @@ public class UserService {
         Double parkingAmount = userParkingService.calculateParkingAmount(userParkingDetail.getEntryTime(), userParkingDetail.getExitTime(), rateAmount);
         userParkingDetail.setParkingAmount(parkingAmount);
         userParkingService.saveUserParkingDetail(userParkingDetail);
+        SlotBlockAvailabilityDetail availabilityDetail = slotBlockAvailabilityService.getSlotBlockAvailabilityBySlotAndBlock(userParkingDetail.getSlotBlockAvailabilityDetails().getSlot(), userParkingDetail.getSlotBlockAvailabilityDetails().getBlock());
+        availabilityDetail.setAvailability(true);
+        slotBlockAvailabilityService.saveSlotBlockAvailability(availabilityDetail);
         ResponseDto responseDto = new ResponseDto("Your Parking Details", userParkingDetail.getVehicleId(), userParkingDetail.getSlotBlockAvailabilityDetails().getSlot().getSlot(), userParkingDetail.getSlotBlockAvailabilityDetails().getBlock().getBlock(), userParkingDetail.getEntryTime(), userParkingDetail.getExitTime(), userParkingDetail.getParkingAmount());
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }

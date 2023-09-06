@@ -1,5 +1,6 @@
 package com.watcix.parkingmanagement.service;
 
+import com.watcix.parkingmanagement.dto.SlotAndBlockResponse;
 import com.watcix.parkingmanagement.entity.BlockDetail;
 import com.watcix.parkingmanagement.entity.SlotBlockAvailabilityDetail;
 import com.watcix.parkingmanagement.entity.SlotDetail;
@@ -59,5 +60,13 @@ public class SlotBlockAvailabilityService {
 
     public void saveSlotBlockAvailability(SlotBlockAvailabilityDetail slotBlockAvailabilityDetail) {
         slotBlockAvailabilityRepository.saveSlotBlockAvailabilityDetails(slotBlockAvailabilityDetail);
+    }
+
+    public List<SlotAndBlockResponse> saveSlotsAndBlocks(List<SlotAndBlockResponse> slotAndBlockResponseList) {
+        return slotBlockAvailabilityRepository.saveSlotsAndBlocks(slotAndBlockResponseList);
+    }
+
+    public SlotBlockAvailabilityDetail getSlotBlockAvailabilityBySlotAndBlock(SlotDetail slot, BlockDetail block) {
+        return slotBlockAvailabilityRepository.getSlotBlockAvailabilityBySlotAndBlock(slot, block);
     }
 }
